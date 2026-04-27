@@ -42,15 +42,18 @@ function unlockServiceToggles(unlocked) {
     if (id === 'imdb') continue; // IMDB is always unlocked
     const row = document.querySelector(`.toggle-row[data-service="${id}"]`);
     const cb = document.getElementById(id);
+    const lock = row?.querySelector('.lock-hint');
     if (!row || !cb) continue;
 
     if (unlocked) {
       row.classList.remove('locked');
       cb.disabled = false;
+      if (lock) lock.style.display = 'none';
     } else {
       row.classList.add('locked');
       cb.disabled = true;
       cb.checked = false;
+      if (lock) lock.style.display = 'inline';
     }
   }
 }
