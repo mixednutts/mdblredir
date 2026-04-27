@@ -14,7 +14,8 @@
     "*://*.thetvdb.com/*",
     "*://*.simkl.com/*",
     "*://*.mdblist.com/*",
-    "*://api.mdblist.com/*"
+    "*://api.mdblist.com/*",
+    "*://api.simkl.com/*"
   ],
   "background": {
     "service_worker": "background.js"
