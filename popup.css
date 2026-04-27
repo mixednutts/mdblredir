@@ -4,7 +4,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: #1e1e1e;
   color: #e0e0e0;
-  width: 260px;
+  width: 300px;
 }
 
 .container {
@@ -129,8 +129,9 @@ input:checked + .slider:before {
 }
 
 .api-row button {
-  padding: 6px 12px;
+  padding: 6px 10px;
   font-size: 12px;
+  white-space: nowrap;
   background: #66a9ed;
   border: none;
   color: #fff;
