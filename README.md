@@ -9,21 +9,21 @@ A Chrome extension that automatically redirects media database links to their eq
 | Platform | Status | Requires API Key | Example URL |
 |----------|--------|------------------|-------------|
 | IMDB | ✅ Working | No | `imdb.com/title/ttXXXXXX` |
-| Trakt | 🧪 In testing | Yes | `trakt.tv/movies/fight-club-1999` |
-| TMDB | 🧪 In testing | Yes | `themoviedb.org/movie/XXXX` |
-| TVDB | 🧪 In testing | Yes | `thetvdb.com/series/XXXX` |
-| SIMKL | 🧪 In testing | Yes | `simkl.com/movie/XXXX` |
+| SIMKL | ✅ Working | No | `simkl.com/movies/XXXX` |
+| Trakt | ✅ Working | Yes | `trakt.tv/movies/fight-club-1999` |
+| TMDB | ✅ Working | Yes | `themoviedb.org/movie/XXXX` |
+| TVDB | ✅ Working | Yes | `thetvdb.com/series/XXXX` |
 
 ## Setup
 
-### IMDB Redirects
-Works out of the box — no setup required.
+### IMDB & SIMKL Redirects
+Work out of the box — no setup required.
 
-### Trakt / TMDB / TVDB / SIMKL Redirects
+### Trakt / TMDB / TVDB Redirects
 These require a free MDBList API key:
 
 1. Open the extension popup and click **"Get MDBList API Key"**
-2. Sign in to [mdblist.com](https://mdblist.com/preferences/) — if you're not logged in you'll be redirected to sign in automatically
+2. Sign in to [mdblist.com](https://mdblist.com/login/) — if you're not logged in you'll be redirected to sign in automatically
 3. Copy your API key from the Preferences page and paste it into the extension popup
 4. Click **Save**
 
@@ -37,13 +37,14 @@ Click the extension icon in Chrome's toolbar:
 - **Per-service toggles** — turn individual platforms on or off
 - **API key field** — enter or update your key directly in the popup
 
-Non-IMDB services show 🔒 until a valid API key is saved.
+Trakt, TMDB, and TVDB show 🔒 until a valid API key is saved.
 
 ## How It Works
 
 - **IMDB** — the extension probes MDBList's frontend redirects to detect whether a title is a movie or TV show, then redirects you accordingly.
+- **SIMKL** — the extension calls SIMKL's public API to retrieve the IMDB ID, then redirects to MDBList.
 - **Trakt** — numeric IDs are looked up via the MDBList API; slugs are converted to titles and searched.
-- **TMDB / TVDB / SIMKL** — the extension calls the MDBList API to resolve the external ID to an IMDB ID, then redirects to MDBList.
+- **TMDB / TVDB** — the extension calls the MDBList API to resolve the external ID to an IMDB ID, then redirects to MDBList.
 
 ## Installation
 
