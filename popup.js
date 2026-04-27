@@ -2,6 +2,7 @@ const masterCheckbox = document.getElementById('master');
 const servicesEl = document.getElementById('services');
 const apiKeyInput = document.getElementById('apikey-input');
 const apiKeySave = document.getElementById('apikey-save');
+const apiKeyToggle = document.getElementById('apikey-toggle');
 const apiKeyStatus = document.getElementById('apikey-status');
 const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl'];
 
@@ -57,6 +58,12 @@ apiKeySave.addEventListener('click', () => {
     apiKeyStatus.textContent = key ? 'Saved' : 'Cleared';
     setTimeout(() => { apiKeyStatus.textContent = ''; }, 2000);
   });
+});
+
+apiKeyToggle.addEventListener('click', () => {
+  const isPassword = apiKeyInput.type === 'password';
+  apiKeyInput.type = isPassword ? 'text' : 'password';
+  apiKeyToggle.textContent = isPassword ? '🙈' : '👁';
 });
 
 loadState();

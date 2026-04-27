@@ -124,6 +124,10 @@ input:checked + .slider:before {
   box-sizing: border-box;
 }
 
+.api-row input::placeholder {
+  color: #666;
+}
+
 .api-row button {
   padding: 6px 12px;
   font-size: 12px;
@@ -137,6 +141,17 @@ input:checked + .slider:before {
 
 .api-row button:hover {
   background: #4a8fd4;
+}
+
+#apikey-toggle {
+  padding: 6px 8px;
+  background: #444;
+  font-size: 14px;
+  line-height: 1;
+}
+
+#apikey-toggle:hover {
+  background: #555;
 }
 
 .api-hint {
