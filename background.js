@@ -9,9 +9,12 @@ async function apiLookup(provider, mediaType, id) {
   const apiKey = await getApiKey();
   if (!apiKey) return null;
 
-  const url = `https://api.mdblist.com/${provider}/${mediaType}/${id}?apikey=${apiKey}`;
+  const url = `https://api.mdblist.com/${provider}/${mediaType}/${id}`;
   try {
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+      cache: 'no-store'
+    });
     if (!res.ok) return null;
     const data = await res.json();
     return data.ids?.imdb || null;
@@ -24,9 +27,12 @@ async function apiSearch(mediaType, query) {
   const apiKey = await getApiKey();
   if (!apiKey) return null;
 
-  const url = `https://api.mdblist.com/search/${mediaType}?q=${encodeURIComponent(query)}&apikey=${apiKey}`;
+  const url = `https://api.mdblist.com/search/${mediaType}?q=${encodeURIComponent(query)}`;
   try {
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+      cache: 'no-store'
+    });
     if (!res.ok) return null;
     const data = await res.json();
     if (data.search && data.search.length > 0) {
