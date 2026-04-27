@@ -20,10 +20,10 @@ Works out of the box — no setup required.
 ### Trakt / TMDB / TVDB / SIMKL Redirects
 These require a free MDBList API key:
 
-1. Open the extension popup and click **"Set MDBList API key"**
-2. Or go to `chrome://extensions/` → MDBList Redirector → **Details** → **Extension options**
-3. Sign in to [mdblist.com](https://mdblist.com/login/) and copy your API key from Preferences
-4. Paste it into the options page and click **Save**
+1. Open the extension popup and click **"Get MDBList API Key"**
+2. Sign in to [mdblist.com](https://mdblist.com/preferences/) — if you're not logged in you'll be redirected to sign in automatically
+3. Copy your API key from the Preferences page and paste it into the extension popup
+4. Click **Save**
 
 The free tier includes **1,000 API requests per day**.
 
@@ -33,21 +33,22 @@ Click the extension icon in Chrome's toolbar:
 
 - **Master toggle** — enable/disable all redirects at once
 - **Per-service toggles** — turn individual platforms on or off
+- **API key field** — enter or update your key directly in the popup
 
-Your preferences persist across browser restarts.
+Non-IMDB services show 🔒 until a valid API key is saved.
 
 ## How It Works
 
-- **IMDB** — the extension probes MDBLIST's frontend redirects to detect whether a title is a movie or TV show, then redirects you accordingly.
-- **Trakt** — slugs are converted to titles and searched via the MDBLIST API; numeric IDs are tried as TMDB lookups.
-- **TMDB / TVDB / SIMKL** — the extension calls the MDBLIST API to resolve the external ID to an IMDB ID, then redirects to MDBLIST.
+- **IMDB** — the extension probes MDBList's frontend redirects to detect whether a title is a movie or TV show, then redirects you accordingly.
+- **Trakt** — numeric IDs are looked up via the MDBList API; slugs are converted to titles and searched.
+- **TMDB / TVDB / SIMKL** — the extension calls the MDBList API to resolve the external ID to an IMDB ID, then redirects to MDBList.
 
 ## Installation
 
 1. Clone or download this repository
 2. Open Chrome and navigate to `chrome://extensions/`
 3. Enable **Developer mode** in the top-right corner
-4. Click **Load unpacked** and select the `mdblredir` directory
+4. Click **Load unpacked** and select the `mdblistredir` directory
 
 ## License
 
