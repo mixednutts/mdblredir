@@ -25,63 +25,63 @@ A collection of real URLs used to verify redirects across all supported platform
 ## Trakt
 
 ### Movies (slug URLs)
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://trakt.tv/movies/fight-club-1999 | Slug → title search via API | 🧪 |
-| https://trakt.tv/movies/the-dark-knight-2008 | Slug → title search via API | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://trakt.tv/movies/fight-club-1999 | https://mdblist.com/movie/tt0137523 | 🧪 |
+| https://trakt.tv/movies/the-dark-knight-2008 | https://mdblist.com/movie/tt0468569 | 🧪 |
 
 ### Movies (numeric URLs)
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://trakt.tv/movies/550 | Numeric ID tried as TMDB | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://trakt.tv/movies/550 | https://mdblist.com/movie/tt0213149 | 🧪 |
 
 ### TV Shows (slug URLs)
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://trakt.tv/shows/game-of-thrones | Slug → title search via API | 🧪 |
-| https://trakt.tv/shows/breaking-bad | Slug → title search via API | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://trakt.tv/shows/game-of-thrones | https://mdblist.com/show/tt0944947 | 🧪 |
+| https://trakt.tv/shows/breaking-bad | https://mdblist.com/show/tt0903747 | 🧪 |
 
 ### TV Shows (numeric URLs)
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://trakt.tv/shows/1390 | Numeric ID tried as TMDB | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://trakt.tv/shows/1390 | https://mdblist.com/show/tt0944947 | 🧪 |
 
 ---
 
 ## TMDB
 
 ### Movies
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://www.themoviedb.org/movie/550 | Direct API lookup | 🧪 |
-| https://www.themoviedb.org/movie/155 | Direct API lookup | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://www.themoviedb.org/movie/550 | https://mdblist.com/movie/tt0137523 | 🧪 |
+| https://www.themoviedb.org/movie/155 | https://mdblist.com/movie/tt0468569 | 🧪 |
 
 ### TV Shows
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://www.themoviedb.org/tv/1399 | Direct API lookup | 🧪 |
-| https://www.themoviedb.org/tv/2316 | Direct API lookup | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://www.themoviedb.org/tv/1399 | https://mdblist.com/show/tt0944947 | 🧪 |
+| https://www.themoviedb.org/tv/2316 | https://mdblist.com/show/tt0411008 | 🧪 |
 
 ---
 
 ## TVDB
 
 ### TV Shows
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://thetvdb.com/series/121361 | Direct API lookup | 🧪 |
-| https://thetvdb.com/series/73244 | Direct API lookup | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://thetvdb.com/series/121361 | https://mdblist.com/show/tt0944947 | 🧪 |
+| https://thetvdb.com/series/73244 | https://mdblist.com/show/tt0411008 | 🧪 |
 
 ---
 
 ## SIMKL
 
 ### Movies
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://simkl.com/movie/1562 | Direct API lookup | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://simkl.com/movie/1562 | https://mdblist.com/movie/tt0137523 | 🧪 |
 
 ### TV Shows
-| Source URL | Notes | Status |
-|------------|-------|--------|
-| https://simkl.com/tv/39633 | Direct API lookup | 🧪 |
+| Source URL | Expected MDBLIST Result | Status |
+|------------|------------------------|--------|
+| https://simkl.com/tv/39633 | https://mdblist.com/show/tt0944947 | 🧪 |
