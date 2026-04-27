@@ -9,12 +9,9 @@ async function apiLookup(provider, mediaType, id) {
   const apiKey = await getApiKey();
   if (!apiKey) return null;
 
-  const url = `https://api.mdblist.com/${provider}/${mediaType}/${id}`;
+  const url = `https://api.mdblist.com/${provider}/${mediaType}/${id}?apikey=${apiKey}`;
   try {
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${apiKey}` },
-      cache: 'no-store'
-    });
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) return null;
     const data = await res.json();
     return data.ids?.imdb || null;
@@ -27,21 +24,29 @@ async function apiSearch(mediaType, query) {
   const apiKey = await getApiKey();
   if (!apiKey) return null;
 
-  const url = `https://api.mdblist.com/search/${mediaType}?q=${encodeURIComponent(query)}`;
+  const url = `https://api.mdblist.com/search/${mediaType}?query=${encodeURIComponent(query)}&limit=50&apikey=${apiKey}`;
   try {
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${apiKey}` },
-      cache: 'no-store'
-    });
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) return null;
     const data = await res.json();
-    if (data.search && data.search.length > 0) {
-      return data.search[0].ids?.imdbid || null;
-    }
-    return null;
+    if (!data.search || data.search.length === 0) return null;
+
+    // Look for exact title match first
+    const lowerQuery = query.toLowerCase();
+    const exact = data.search.find(r => r.title.toLowerCase() === lowerQuery);
+    if (exact) return exact.ids?.imdbid || null;
+
+    // Fallback to first result
+    return data.search[0].ids?.imdbid || null;
   } catch (_) {
     return null;
   }
+}
+
+function slugToTitle(slug) {
+  // Remove trailing year like "-1999" if present
+  const withoutYear = slug.replace(/-(19\d{2}|20\d{2})$/, '');
+  return withoutYear.replace(/-/g, ' ');
 }
 
 const SERVICES = {
@@ -81,14 +86,14 @@ const SERVICES = {
       const id = match[4];
 
       if (/^\d+$/.test(id)) {
-        // Numeric ID — try TMDB first (Trakt often uses TMDB IDs)
-        const imdbId = await apiLookup('tmdb', mediaType, id);
+        // Numeric ID — use Trakt lookup directly
+        const imdbId = await apiLookup('trakt', mediaType, id);
         if (imdbId) return `https://mdblist.com/${mediaType}/${imdbId}`;
         return null;
       }
 
       // Slug — convert to title and search MDBList
-      const title = id.replace(/-/g, ' ');
+      const title = slugToTitle(id);
       const imdbId = await apiSearch(mediaType, title);
       if (imdbId) return `https://mdblist.com/${mediaType}/${imdbId}`;
       return null;
