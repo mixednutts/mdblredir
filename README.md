@@ -1,20 +1,29 @@
-# mdblredir
+# MDBList Redirector
 
 A Chrome extension that automatically redirects media database links to their equivalent [MDBLIST](https://mdblist.com) pages.
 
 ## Supported Platforms
 
-| Platform | Example URL | Redirects To |
-|----------|-------------|--------------|
-| IMDB | `imdb.com/title/ttXXXXXX` | `mdblist.com/movie/ttXXXXXX` or `mdblist.com/show/ttXXXXXX` |
+| Platform | Status | Example URL |
+|----------|--------|-------------|
+| IMDB | ✅ Working | `imdb.com/title/ttXXXXXX` |
+| Trakt | 🧪 In testing | `trakt.tv/movies/XXXX` |
+| TMDB | 🔜 Planned | `themoviedb.org/movie/XXXX` |
+| TVDB | 🔜 Planned | `thetvdb.com/series/XXXX` |
+| SIMKL | 🔜 Planned | `simkl.com/movie/XXXX` |
 
-> **Note:** TMDB, TVDB, and SIMKL redirects are planned but not yet supported because MDBLIST does not expose public frontend redirects for those IDs.
+## Toggle Controls
+
+Click the extension icon in Chrome's toolbar to open the popup:
+
+- **Master toggle** — enable/disable all redirects at once
+- **Per-service toggles** — turn individual platforms on or off
+
+Your preferences are saved to Chrome's local storage and persist across browser restarts.
 
 ## How It Works
 
-When you navigate to an IMDB title page, the extension's background service worker quickly probes MDBLIST to determine whether the title is a movie or a TV show, then redirects you to the correct MDBLIST page.
-
-The lookup happens in milliseconds and is cached for the session so repeated visits to the same title are instant.
+When you navigate to a supported title page and that service is enabled, the extension's background service worker probes MDBLIST to determine the correct redirect URL, then sends you there. Results are cached for the session so repeated visits are instant.
 
 ## Installation
 

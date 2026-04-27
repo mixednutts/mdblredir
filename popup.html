@@ -2,17 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>mdblredir</title>
+  <title>MDBList Redirector</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
     <h1>MDBList Redirector</h1>
-    <label class="toggle">
-      <input type="checkbox" id="enabled">
-      <span class="slider"></span>
-    </label>
-    <p id="status">Enabled</p>
+
+    <div class="section master">
+      <label class="toggle-row">
+        <span class="label">Enable Redirects</span>
+        <label class="toggle">
+          <input type="checkbox" id="master">
+          <span class="slider"></span>
+        </label>
+      </label>
+    </div>
+
+    <div class="section services" id="services">
+      <div class="toggle-row">
+        <span class="label">IMDB</span>
+        <label class="toggle">
+          <input type="checkbox" id="imdb">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="label">Trakt</span>
+        <label class="toggle">
+          <input type="checkbox" id="trakt">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="label">TMDB</span>
+        <label class="toggle">
+          <input type="checkbox" id="tmdb">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="label">TVDB</span>
+        <label class="toggle">
+          <input type="checkbox" id="tvdb">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="label">SIMKL</span>
+        <label class="toggle">
+          <input type="checkbox" id="simkl">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
   </div>
   <script src="popup.js"></script>
 </body>

@@ -1,14 +1,46 @@
-const checkbox = document.getElementById('enabled');
-const statusText = document.getElementById('status');
+const masterCheckbox = document.getElementById('master');
+const servicesEl = document.getElementById('services');
+const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl'];
 
-chrome.storage.local.get('mdblredirEnabled', (result) => {
-  const enabled = result.mdblredirEnabled !== false; // default true
-  checkbox.checked = enabled;
-  statusText.textContent = enabled ? 'Enabled' : 'Disabled';
-});
+function loadState() {
+  chrome.storage.local.get(['mdblredirEnabled', 'services'], (result) => {
+    const enabled = result.mdblredirEnabled !== false;
+    const services = result.services || {};
 
-checkbox.addEventListener('change', () => {
-  const enabled = checkbox.checked;
+    masterCheckbox.checked = enabled;
+    updateServicesVisibility(enabled);
+
+    for (const id of serviceIds) {
+      const cb = document.getElementById(id);
+      if (cb) cb.checked = services[id] !== false; // default true
+    }
+  });
+}
+
+function updateServicesVisibility(enabled) {
+  if (enabled) {
+    servicesEl.classList.remove('disabled');
+  } else {
+    servicesEl.classList.add('disabled');
+  }
+}
+
+masterCheckbox.addEventListener('change', () => {
+  const enabled = masterCheckbox.checked;
   chrome.storage.local.set({ mdblredirEnabled: enabled });
-  statusText.textContent = enabled ? 'Enabled' : 'Disabled';
+  updateServicesVisibility(enabled);
 });
+
+for (const id of serviceIds) {
+  const cb = document.getElementById(id);
+  if (!cb) continue;
+  cb.addEventListener('change', () => {
+    chrome.storage.local.get('services', (result) => {
+      const services = result.services || {};
+      services[id] = cb.checked;
+      chrome.storage.local.set({ services });
+    });
+  });
+}
+
+loadState();
