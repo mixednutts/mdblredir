@@ -1,3 +1,5 @@
+!! USE AT YOUR OWN RISK !! - Your IP may be blocked from a service if it detects unintended usage (like scraping) 
+
 # MDBList Redirector
 
 ![MDBList Redirector](mdblredir.png?raw=true)
