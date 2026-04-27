@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "mdblredir",
-  "version": "1.1.0",
-  "description": "Redirect media links (IMDB, etc.) to the equivalent MDBLIST page.",
+  "version": "1.2.0",
+  "description": "Redirect IMDB links to the equivalent MDBLIST page.",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "host_permissions": [
     "*://*.imdb.com/*",
@@ -12,6 +13,14 @@
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "icons": {
     "16": "icons/icon16.png",

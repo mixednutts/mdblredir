@@ -3,6 +3,10 @@ const cache = new Map();
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'loading' || !tab?.url) return;
 
+  // Check toggle state
+  const result = await chrome.storage.local.get('mdblredirEnabled');
+  if (result.mdblredirEnabled === false) return;
+
   const imdbMatch = tab.url.match(/https?:\/\/(www\.)?imdb\.com\/title\/(tt\d+)/i);
   if (!imdbMatch) return;
 
@@ -46,7 +50,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     // fall through
   }
 
-  // Not found on MDBLIST — redirect to movie path so user sees MDBLIST 404
   cache.set(imdbId, movieUrl);
   chrome.tabs.update(tabId, { url: movieUrl });
 });
