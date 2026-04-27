@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MDBList Redirector",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Redirect media links (IMDB, Trakt, TMDB, TVDB, SIMKL) to the equivalent MDBLIST page.",
   "permissions": [
     "tabs",
@@ -13,7 +13,8 @@
     "*://*.themoviedb.org/*",
     "*://*.thetvdb.com/*",
     "*://*.simkl.com/*",
-    "*://*.mdblist.com/*"
+    "*://*.mdblist.com/*",
+    "*://api.mdblist.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -26,6 +27,7 @@
       "128": "icons/icon128.png"
     }
   },
+  "options_page": "options.html",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

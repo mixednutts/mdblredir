@@ -1,9 +1,11 @@
 const masterCheckbox = document.getElementById('master');
 const servicesEl = document.getElementById('services');
+const apiKeySection = document.getElementById('apikey-section');
+const openOptions = document.getElementById('open-options');
 const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl'];
 
 function loadState() {
-  chrome.storage.local.get(['mdblredirEnabled', 'services'], (result) => {
+  chrome.storage.local.get(['mdblredirEnabled', 'services', 'mdblistApiKey'], (result) => {
     const enabled = result.mdblredirEnabled !== false;
     const services = result.services || {};
 
@@ -12,7 +14,11 @@ function loadState() {
 
     for (const id of serviceIds) {
       const cb = document.getElementById(id);
-      if (cb) cb.checked = services[id] !== false; // default true
+      if (cb) cb.checked = services[id] !== false;
+    }
+
+    if (result.mdblistApiKey) {
+      apiKeySection.style.display = 'none';
     }
   });
 }
@@ -42,5 +48,10 @@ for (const id of serviceIds) {
     });
   });
 }
+
+openOptions.addEventListener('click', (e) => {
+  e.preventDefault();
+  chrome.runtime.openOptionsPage();
+});
 
 loadState();
