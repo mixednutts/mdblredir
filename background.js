@@ -136,9 +136,9 @@ const SERVICES = {
   },
 
   simkl: {
-    pattern: /https?:\/\/(www\.)?simkl\.com\/(movie|tv)\/(\d+)/i,
+    pattern: /https?:\/\/(www\.)?simkl\.com\/(movies?|tv|shows)\/(\d+)/i,
     async resolve(match) {
-      const mediaType = match[2] === 'movie' ? 'movie' : 'show';
+      const mediaType = match[2].startsWith('movie') ? 'movie' : 'show';
       const id = match[3];
       const imdbId = await apiLookup('simkl', mediaType, id);
       if (imdbId) return `https://mdblist.com/${mediaType}/${imdbId}`;
