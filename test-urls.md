@@ -66,11 +66,13 @@ A collection of real URLs used to verify redirects across all supported platform
 
 ## TVDB
 
+TVDB now uses slug URLs (`/series/{slug}`). The extension scrapes the page for the numeric ID.
+
 ### TV Shows
 | Source URL | Expected MDBLIST Result | Title | Status |
 |------------|------------------------|-------|--------|
-| https://thetvdb.com/series/121361 | https://mdblist.com/show/tt0944947 | Game of Thrones | 🧪 |
-| https://thetvdb.com/series/73244 | https://mdblist.com/show/tt0411008 | Lost | 🧪 |
+| https://thetvdb.com/series/game-of-thrones | https://mdblist.com/show/tt0944947 | Game of Thrones | 🧪 |
+| https://thetvdb.com/series/lost | https://mdblist.com/show/tt0411008 | Lost | 🧪 |
 
 ---
 

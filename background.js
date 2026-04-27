@@ -31,12 +31,10 @@ async function apiSearch(mediaType, query) {
     const data = await res.json();
     if (!data.search || data.search.length === 0) return null;
 
-    // Look for exact title match first
     const lowerQuery = query.toLowerCase();
     const exact = data.search.find(r => r.title.toLowerCase() === lowerQuery);
     if (exact) return exact.ids?.imdbid || null;
 
-    // Fallback to first result
     return data.search[0].ids?.imdbid || null;
   } catch (_) {
     return null;
@@ -44,7 +42,6 @@ async function apiSearch(mediaType, query) {
 }
 
 function slugToTitle(slug) {
-  // Remove trailing year like "-1999" if present
   const withoutYear = slug.replace(/-(19\d{2}|20\d{2})$/, '');
   return withoutYear.replace(/-/g, ' ');
 }
@@ -86,13 +83,11 @@ const SERVICES = {
       const id = match[4];
 
       if (/^\d+$/.test(id)) {
-        // Numeric ID — use Trakt lookup directly
         const imdbId = await apiLookup('trakt', mediaType, id);
         if (imdbId) return `https://mdblist.com/${mediaType}/${imdbId}`;
         return null;
       }
 
-      // Slug — convert to title and search MDBList
       const title = slugToTitle(id);
       const imdbId = await apiSearch(mediaType, title);
       if (imdbId) return `https://mdblist.com/${mediaType}/${imdbId}`;
@@ -112,11 +107,29 @@ const SERVICES = {
   },
 
   tvdb: {
-    pattern: /https?:\/\/(www\.)?thetvdb\.com\/(series\/(\d+)|.*[?&]id=(\d+))/i,
+    pattern: /https?:\/\/(www\.)?thetvdb\.com\/series\/([^/?]+)/i,
     async resolve(match) {
-      const id = match[3] || match[4];
-      if (!id) return null;
-      const imdbId = await apiLookup('tvdb', 'show', id);
+      const slugOrId = match[2];
+
+      let tvdbId = null;
+
+      if (/^\d+$/.test(slugOrId)) {
+        // Old numeric path — verify it exists by trying the API directly
+        tvdbId = slugOrId;
+      } else {
+        // New slug path — scrape the TVDB page for data-id
+        try {
+          const res = await fetch(`https://thetvdb.com/series/${slugOrId}`, { cache: 'no-store' });
+          if (res.ok) {
+            const html = await res.text();
+            const idMatch = html.match(/data-id="(\d+)"/);
+            if (idMatch) tvdbId = idMatch[1];
+          }
+        } catch (_) {}
+      }
+
+      if (!tvdbId) return null;
+      const imdbId = await apiLookup('tvdb', 'show', tvdbId);
       if (imdbId) return `https://mdblist.com/show/${imdbId}`;
       return null;
     }
