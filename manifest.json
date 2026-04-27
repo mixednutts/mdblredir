@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "mdblredir",
+  "name": "MDBList Redirector",
   "version": "1.2.0",
   "description": "Redirect IMDB links to the equivalent MDBLIST page.",
   "permissions": [
