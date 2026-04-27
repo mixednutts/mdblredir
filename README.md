@@ -22,7 +22,7 @@ These require a free MDBList API key:
 
 1. Open the extension popup and click **"Set MDBList API key"**
 2. Or go to `chrome://extensions/` → MDBList Redirector → **Details** → **Extension options**
-3. Sign in to [mdblist.com/preferences](https://mdblist.com/preferences) and copy your API key
+3. Sign in to [mdblist.com](https://mdblist.com/login/) and copy your API key from Preferences
 4. Paste it into the options page and click **Save**
 
 The free tier includes **1,000 API requests per day**.
