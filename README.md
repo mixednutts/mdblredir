@@ -23,7 +23,7 @@ Work out of the box — no setup required.
 These require a free MDBList API key:
 
 1. Open the extension popup and click **"Get MDBList API Key"**
-2. Sign in to [mdblist.com](https://mdblist.com/login/) — if you're not logged in you'll be redirected to sign in automatically
+2. Sign in to [mdblist.com](https://mdblist.com/signin/) — if you're not logged in you'll be redirected to sign in automatically
 3. Copy your API key from the Preferences page and paste it into the extension popup
 4. Click **Save**
 
