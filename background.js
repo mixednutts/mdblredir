@@ -8,14 +8,26 @@ const SERVICES = {
       const showUrl = `https://mdblist.com/show/${id}`;
 
       try {
-        const res = await fetch(movieUrl, { method: 'HEAD', redirect: 'manual', cache: 'no-store' });
-        if (res.status === 301 || res.ok) return movieUrl;
-      } catch (_) {}
+        const res = await fetch(movieUrl, {
+          method: 'HEAD',
+          redirect: 'follow',
+          cache: 'no-store'
+        });
+        if (res.ok) return movieUrl;
+      } catch (_) {
+        // fall through
+      }
 
       try {
-        const res = await fetch(showUrl, { method: 'HEAD', redirect: 'manual', cache: 'no-store' });
-        if (res.status === 301 || res.ok) return showUrl;
-      } catch (_) {}
+        const res = await fetch(showUrl, {
+          method: 'HEAD',
+          redirect: 'follow',
+          cache: 'no-store'
+        });
+        if (res.ok) return showUrl;
+      } catch (_) {
+        // fall through
+      }
 
       return movieUrl;
     }
@@ -24,9 +36,7 @@ const SERVICES = {
   trakt: {
     pattern: /https?:\/\/(www\.)?trakt\.tv\/(movies|shows)\/([^/?]+)/i,
     async resolve(id) {
-      // TODO: determine correct MDBLIST URL for Trakt IDs/slugs
-      // For now, return null to signal "not implemented"
-      return null;
+      return null; // not yet implemented
     }
   },
 
@@ -70,17 +80,17 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const match = tab.url.match(service.pattern);
     if (!match) continue;
 
-    const id = match[match.length - 1]; // last capture group is usually the ID
+    const id = match[match.length - 1];
     const cacheKey = `${key}:${id}`;
 
     let target = cache.get(cacheKey);
     if (!target) {
       target = await service.resolve(id);
-      if (!target) continue; // service not ready or item not found
+      if (!target) continue;
       cache.set(cacheKey, target);
     }
 
     chrome.tabs.update(tabId, { url: target });
-    return; // only handle one service per navigation
+    return;
   }
 });
