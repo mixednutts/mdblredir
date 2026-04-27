@@ -1,6 +1,6 @@
 # MDBList Redirector
 
-![MDBList Redirector](mdblredir.png)
+![MDBList Redirector](mdblredir.png?raw=true)
 
 A Chrome extension that automatically redirects media database links to their equivalent [MDBLIST](https://mdblist.com) pages.
 
