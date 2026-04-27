@@ -96,7 +96,7 @@ const SERVICES = {
   },
 
   tmdb: {
-    pattern: /https?:\/\/(www\.)?themoviedb\.org(?:\/[a-z]{2}(?:-[a-zA-Z]{2,})?)?\/(movie|tv)\/(\d+)/i,
+    pattern: /https?:\/\/(www\.)?themoviedb\.org\/(movie|tv)\/(\d+)/i,
     async resolve(match) {
       const mediaType = match[2] === 'movie' ? 'movie' : 'show';
       const id = match[3];
