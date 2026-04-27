@@ -4,7 +4,7 @@ const apiKeyInput = document.getElementById('apikey-input');
 const apiKeySave = document.getElementById('apikey-save');
 const apiKeyToggle = document.getElementById('apikey-toggle');
 const apiKeyStatus = document.getElementById('apikey-status');
-const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl', 'letterboxd'];
+const serviceIds = ['imdb', 'simkl', 'letterboxd', 'trakt', 'tmdb', 'tvdb'];
 
 function loadState() {
   chrome.storage.local.get(['mdblredirEnabled', 'services', 'mdblistApiKey'], (result) => {
