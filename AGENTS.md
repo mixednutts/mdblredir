@@ -29,7 +29,6 @@ navigation requests from popular media databases to their equivalent pages on
 
 - **IMDB** → probes `mdblist.com/movie/<imdb_id>` then `mdblist.com/show/<imdb_id>`, redirects to whichever returns HTTP 301/200
 - **Letterboxd** → scrapes `letterboxd.com/film/<slug>` for an IMDB ID, falls back to MDBList API title search
-- **SIMKL** → disabled by default; calls SIMKL's public API which may IP-ban aggressive requests
 
 ## Adding a New Platform
 

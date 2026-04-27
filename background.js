@@ -135,39 +135,6 @@ const SERVICES = {
     }
   },
 
-  simkl: {
-    pattern: /https?:\/\/(www\.)?simkl\.com\/(movies?|tv|shows)\/(\d+)/i,
-    async resolve(match) {
-      const simklType = match[2].startsWith('movie') ? 'movies' : 'tv';
-      const id = match[3];
-
-      try {
-        const res = await fetch(`https://api.simkl.com/${simklType}/${id}`, { cache: 'no-store' });
-        if (!res.ok) return null;
-        const data = await res.json();
-        const imdbId = data.ids?.imdb;
-        if (!imdbId) return null;
-
-        const movieUrl = `https://mdblist.com/movie/${imdbId}`;
-        const showUrl = `https://mdblist.com/show/${imdbId}`;
-
-        try {
-          const headRes = await fetch(movieUrl, { method: 'HEAD', redirect: 'follow', cache: 'no-store' });
-          if (headRes.ok) return movieUrl;
-        } catch (_) {}
-
-        try {
-          const headRes = await fetch(showUrl, { method: 'HEAD', redirect: 'follow', cache: 'no-store' });
-          if (headRes.ok) return showUrl;
-        } catch (_) {}
-
-        return movieUrl;
-      } catch (_) {
-        return null;
-      }
-    }
-  },
-
   letterboxd: {
     pattern: /https?:\/\/(www\.)?letterboxd\.com\/film\/([^/?]+)/i,
     async resolve(match) {
@@ -204,7 +171,6 @@ chrome.runtime.onInstalled.addListener((details) => {
       mdblredirEnabled: true,
       services: {
         imdb: true,
-        simkl: false,
         trakt: false,
         tmdb: false,
         tvdb: false,

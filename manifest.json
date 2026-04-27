@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "MDBList Redirector",
   "version": "1.5.0",
-  "description": "Redirect media links (IMDB, Trakt, TMDB, TVDB, SIMKL, Letterboxd) to the equivalent MDBLIST page.",
+  "description": "Redirect media links (IMDB, Trakt, TMDB, TVDB, Letterboxd) to the equivalent MDBLIST page.",
   "permissions": [
     "tabs",
     "storage"
@@ -12,11 +12,9 @@
     "*://*.trakt.tv/*",
     "*://*.themoviedb.org/*",
     "*://*.thetvdb.com/*",
-    "*://*.simkl.com/*",
     "*://*.letterboxd.com/*",
     "*://*.mdblist.com/*",
-    "*://api.mdblist.com/*",
-    "*://api.simkl.com/*"
+    "*://api.mdblist.com/*"
   ],
   "background": {
     "service_worker": "background.js"

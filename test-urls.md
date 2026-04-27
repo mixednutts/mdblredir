@@ -76,22 +76,6 @@ TVDB now uses slug URLs (`/series/{slug}`). The extension scrapes the page for t
 
 ---
 
-## SIMKL
-
-SIMKL uses `movies/` (plural) for movies and `tv/` for shows.
-
-### Movies
-| Source URL | Expected MDBLIST Result | Title | Status |
-|------------|------------------------|-------|--------|
-| https://simkl.com/movies/53894/ | https://mdblist.com/movie/tt0137523 | Fight Club | 🧪 |
-
-### TV Shows
-| Source URL | Expected MDBLIST Result | Title | Status |
-|------------|------------------------|-------|--------|
-| https://simkl.com/tv/17465/ | https://mdblist.com/show/tt0944947 | Game of Thrones | 🧪 |
-
----
-
 ## Letterboxd
 
 Letterboxd uses `/film/{slug}` URLs. The extension scrapes the page for the IMDB ID.

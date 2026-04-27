@@ -9,7 +9,6 @@ A Chrome extension that automatically redirects media database links to their eq
 | Platform | Status | Requires API Key | Example URL |
 |----------|--------|------------------|-------------|
 | IMDB | ✅ Working | No | `imdb.com/title/ttXXXXXX` |
-| SIMKL | ⚠️ Disabled by default | No | `simkl.com/movies/XXXX` |
 | Letterboxd | ✅ Working | No | `letterboxd.com/film/XXXX` |
 | Trakt | ✅ Working | Yes | `trakt.tv/movies/fight-club-1999` |
 | TMDB | ✅ Working | Yes | `themoviedb.org/movie/XXXX` |
@@ -19,8 +18,6 @@ A Chrome extension that automatically redirects media database links to their eq
 
 ### IMDB & Letterboxd Redirects
 Work out of the box — no setup required.
-
-> **Note:** SIMKL is disabled by default due to IP-banning issues. SIMKL's API may block or rate-limit requests, causing redirects to fail. You can re-enable it in the extension popup if needed, but be aware that repeated requests may result in a temporary ban.
 
 ### Trakt / TMDB / TVDB Redirects
 These require a free MDBList API key:
@@ -46,7 +43,6 @@ Letterboxd works without an API key (page scraping), but the API key enables a t
 ## How It Works
 
 - **IMDB** — the extension probes MDBList's frontend redirects to detect whether a title is a movie or TV show, then redirects you accordingly.
-- **SIMKL** — the extension calls SIMKL's public API to retrieve the IMDB ID, then redirects to MDBList. Disabled by default due to SIMKL IP-banning aggressive requests.
 - **Letterboxd** — the extension scrapes the Letterboxd page for the IMDB ID; if not found, it falls back to searching by title via the MDBList API.
 - **Trakt** — numeric IDs are looked up via the MDBList API; slugs are converted to titles and searched.
 - **TMDB / TVDB** — the extension calls the MDBList API to resolve the external ID to an IMDB ID, then redirects to MDBList.
