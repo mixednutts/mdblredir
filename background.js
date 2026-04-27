@@ -175,10 +175,10 @@ chrome.runtime.onInstalled.addListener((details) => {
       mdblredirEnabled: true,
       services: {
         imdb: true,
+        simkl: true,
         trakt: false,
         tmdb: false,
-        tvdb: false,
-        simkl: false
+        tvdb: false
       }
     });
   }

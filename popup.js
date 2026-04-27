@@ -39,7 +39,7 @@ function updateServicesVisibility(enabled) {
 
 function unlockServiceToggles(unlocked) {
   for (const id of serviceIds) {
-    if (id === 'imdb') continue; // IMDB is always unlocked
+    if (id === 'imdb' || id === 'simkl') continue; // IMDB & SIMKL are always unlocked
     const row = document.querySelector(`.toggle-row[data-service="${id}"]`);
     const cb = document.getElementById(id);
     const lock = row?.querySelector('.lock-hint');
