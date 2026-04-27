@@ -22,6 +22,9 @@ function loadState() {
     if (result.mdblistApiKey) {
       apiKeyInput.value = result.mdblistApiKey;
       apiKeyStatus.textContent = 'Saved';
+      unlockServiceToggles(true);
+    } else {
+      unlockServiceToggles(false);
     }
   });
 }
@@ -31,6 +34,24 @@ function updateServicesVisibility(enabled) {
     servicesEl.classList.remove('disabled');
   } else {
     servicesEl.classList.add('disabled');
+  }
+}
+
+function unlockServiceToggles(unlocked) {
+  for (const id of serviceIds) {
+    if (id === 'imdb') continue; // IMDB is always unlocked
+    const row = document.querySelector(`.toggle-row[data-service="${id}"]`);
+    const cb = document.getElementById(id);
+    if (!row || !cb) continue;
+
+    if (unlocked) {
+      row.classList.remove('locked');
+      cb.disabled = false;
+    } else {
+      row.classList.add('locked');
+      cb.disabled = true;
+      cb.checked = false;
+    }
   }
 }
 
@@ -56,6 +77,7 @@ apiKeySave.addEventListener('click', () => {
   const key = apiKeyInput.value.trim();
   chrome.storage.local.set({ mdblistApiKey: key }, () => {
     apiKeyStatus.textContent = key ? 'Saved' : 'Cleared';
+    unlockServiceToggles(!!key);
     setTimeout(() => { apiKeyStatus.textContent = ''; }, 2000);
   });
 });

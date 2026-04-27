@@ -134,6 +134,22 @@ const SERVICES = {
   }
 };
 
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    chrome.storage.local.set({
+      mdblredirEnabled: true,
+      services: {
+        imdb: true,
+        trakt: false,
+        tmdb: false,
+        tvdb: false,
+        simkl: false
+      }
+    });
+    chrome.runtime.openOptionsPage();
+  }
+});
+
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'loading' || !tab?.url) return;
 

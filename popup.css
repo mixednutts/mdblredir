@@ -38,6 +38,19 @@ h1 {
   padding: 6px 0;
 }
 
+.toggle-row.locked {
+  opacity: 0.45;
+}
+
+.toggle-row.locked .label {
+  color: #888;
+}
+
+.lock-hint {
+  font-size: 11px;
+  margin-left: 4px;
+}
+
 .label {
   font-size: 13px;
   color: #ccc;
@@ -52,6 +65,10 @@ h1 {
 .services.disabled .toggle-row {
   opacity: 0.4;
   pointer-events: none;
+}
+
+.services.disabled .toggle-row.locked {
+  opacity: 0.25;
 }
 
 .toggle {
@@ -131,13 +148,13 @@ input:checked + .slider:before {
 .api-row button {
   padding: 6px 10px;
   font-size: 12px;
-  white-space: nowrap;
   background: #66a9ed;
   border: none;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .api-row button:hover {
