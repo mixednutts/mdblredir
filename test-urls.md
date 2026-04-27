@@ -81,9 +81,9 @@ TVDB now uses slug URLs (`/series/{slug}`). The extension scrapes the page for t
 ### Movies
 | Source URL | Expected MDBLIST Result | Title | Status |
 |------------|------------------------|-------|--------|
-| https://simkl.com/movie/1562 | https://mdblist.com/movie/tt0137523 | Fight Club | 🧪 |
+| https://simkl.com/movie/53894 | https://mdblist.com/movie/tt0137523 | Fight Club | 🧪 |
 
 ### TV Shows
 | Source URL | Expected MDBLIST Result | Title | Status |
 |------------|------------------------|-------|--------|
-| https://simkl.com/tv/39633 | https://mdblist.com/show/tt0944947 | Game of Thrones | 🧪 |
+| https://simkl.com/tv/17465 | https://mdblist.com/show/tt0944947 | Game of Thrones | 🧪 |
