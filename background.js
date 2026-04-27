@@ -1,4 +1,5 @@
 const cache = new Map();
+const previousUrls = new Map();
 
 async function getApiKey() {
   const result = await chrome.storage.local.get('mdblistApiKey');
@@ -96,7 +97,7 @@ const SERVICES = {
   },
 
   tmdb: {
-    pattern: /https?:\/\/(www\.)?themoviedb\.org\/(movie|tv)\/(\d+)/i,
+    pattern: /https?:\/\/(www\.)?themoviedb\.org(?:\/[a-z]{2}(?:-[a-zA-Z]{2,})?)?\/(movie|tv)\/(\d+)/i,
     async resolve(match) {
       const mediaType = match[2] === 'movie' ? 'movie' : 'show';
       const id = match[3];
@@ -217,6 +218,13 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'loading' || !tab?.url) return;
 
+  const previousUrl = previousUrls.get(tabId);
+  previousUrls.set(tabId, tab.url);
+
+  if (previousUrl && /^https?:\/\/([^/]+\.)?mdblist\.com\//i.test(previousUrl)) {
+    return;
+  }
+
   const { mdblredirEnabled, services } = await chrome.storage.local.get([
     'mdblredirEnabled',
     'services'
@@ -244,4 +252,8 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     chrome.tabs.update(tabId, { url: target });
     return;
   }
+});
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  previousUrls.delete(tabId);
 });
