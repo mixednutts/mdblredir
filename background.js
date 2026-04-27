@@ -1,5 +1,4 @@
 const cache = new Map();
-const previousUrls = new Map();
 
 async function getApiKey() {
   const result = await chrome.storage.local.get('mdblistApiKey');
@@ -218,13 +217,6 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'loading' || !tab?.url) return;
 
-  const previousUrl = previousUrls.get(tabId);
-  previousUrls.set(tabId, tab.url);
-
-  if (previousUrl && /^https?:\/\/([^/]+\.)?mdblist\.com\//i.test(previousUrl)) {
-    return;
-  }
-
   const { mdblredirEnabled, services } = await chrome.storage.local.get([
     'mdblredirEnabled',
     'services'
@@ -252,8 +244,4 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     chrome.tabs.update(tabId, { url: target });
     return;
   }
-});
-
-chrome.tabs.onRemoved.addListener((tabId) => {
-  previousUrls.delete(tabId);
 });
