@@ -1,7 +1,8 @@
 const masterCheckbox = document.getElementById('master');
 const servicesEl = document.getElementById('services');
-const apiKeySection = document.getElementById('apikey-section');
-const openOptions = document.getElementById('open-options');
+const apiKeyInput = document.getElementById('apikey-input');
+const apiKeySave = document.getElementById('apikey-save');
+const apiKeyStatus = document.getElementById('apikey-status');
 const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl'];
 
 function loadState() {
@@ -18,7 +19,8 @@ function loadState() {
     }
 
     if (result.mdblistApiKey) {
-      apiKeySection.style.display = 'none';
+      apiKeyInput.value = result.mdblistApiKey;
+      apiKeyStatus.textContent = 'Saved';
     }
   });
 }
@@ -49,9 +51,12 @@ for (const id of serviceIds) {
   });
 }
 
-openOptions.addEventListener('click', (e) => {
-  e.preventDefault();
-  chrome.runtime.openOptionsPage();
+apiKeySave.addEventListener('click', () => {
+  const key = apiKeyInput.value.trim();
+  chrome.storage.local.set({ mdblistApiKey: key }, () => {
+    apiKeyStatus.textContent = key ? 'Saved' : 'Cleared';
+    setTimeout(() => { apiKeyStatus.textContent = ''; }, 2000);
+  });
 });
 
 loadState();

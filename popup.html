@@ -57,8 +57,16 @@
       </div>
     </div>
 
-    <div class="section" id="apikey-section">
-      <a href="#" id="open-options" style="color:#66a9ed;font-size:12px;">Set MDBList API key for Trakt / TMDB / TVDB / SIMKL</a>
+    <div class="section apikey">
+      <label class="api-label">MDBList API Key</label>
+      <div class="api-row">
+        <input type="text" id="apikey-input" placeholder="Paste key here" autocomplete="off">
+        <button id="apikey-save">Save</button>
+      </div>
+      <div class="api-hint">
+        <a href="https://mdblist.com/preferences" target="_blank" style="color:#66a9ed;">Get free key</a>
+        <span id="apikey-status"></span>
+      </div>
     </div>
   </div>
   <script src="popup.js"></script>
