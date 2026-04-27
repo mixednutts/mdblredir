@@ -146,7 +146,6 @@ chrome.runtime.onInstalled.addListener((details) => {
         simkl: false
       }
     });
-    chrome.runtime.openOptionsPage();
   }
 });
 
