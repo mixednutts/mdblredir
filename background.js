@@ -75,10 +75,10 @@ const SERVICES = {
   },
 
   trakt: {
-    pattern: /https?:\/\/(www\.)?trakt\.tv\/(movies|shows)\/([^/?]+)/i,
+    pattern: /https?:\/\/(www\.)?(app\.)?trakt\.tv\/(movies|shows)\/([^/?]+)/i,
     async resolve(match) {
-      const mediaType = match[2] === 'movies' ? 'movie' : 'show';
-      const id = match[3];
+      const mediaType = match[3] === 'movies' ? 'movie' : 'show';
+      const id = match[4];
 
       if (/^\d+$/.test(id)) {
         // Numeric ID — try TMDB first (Trakt often uses TMDB IDs)
