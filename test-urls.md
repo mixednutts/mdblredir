@@ -89,3 +89,16 @@ SIMKL uses `movies/` (plural) for movies and `tv/` for shows.
 | Source URL | Expected MDBLIST Result | Title | Status |
 |------------|------------------------|-------|--------|
 | https://simkl.com/tv/17465/ | https://mdblist.com/show/tt0944947 | Game of Thrones | 🧪 |
+
+---
+
+## Letterboxd
+
+Letterboxd uses `/film/{slug}` URLs. The extension scrapes the page for the IMDB ID.
+
+### Movies
+| Source URL | Expected MDBLIST Result | Title | Status |
+|------------|------------------------|-------|--------|
+| https://letterboxd.com/film/fight-club/ | https://mdblist.com/movie/tt0137523 | Fight Club | 🧪 |
+| https://letterboxd.com/film/the-dark-knight/ | https://mdblist.com/movie/tt0468569 | The Dark Knight | 🧪 |
+| https://letterboxd.com/film/pulp-fiction/ | https://mdblist.com/movie/tt0110912 | Pulp Fiction | 🧪 |

@@ -4,7 +4,7 @@ const apiKeyInput = document.getElementById('apikey-input');
 const apiKeySave = document.getElementById('apikey-save');
 const apiKeyToggle = document.getElementById('apikey-toggle');
 const apiKeyStatus = document.getElementById('apikey-status');
-const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl'];
+const serviceIds = ['imdb', 'trakt', 'tmdb', 'tvdb', 'simkl', 'letterboxd'];
 
 function loadState() {
   chrome.storage.local.get(['mdblredirEnabled', 'services', 'mdblistApiKey'], (result) => {
@@ -39,7 +39,7 @@ function updateServicesVisibility(enabled) {
 
 function unlockServiceToggles(unlocked) {
   for (const id of serviceIds) {
-    if (id === 'imdb' || id === 'simkl') continue; // IMDB & SIMKL are always unlocked
+    if (id === 'imdb' || id === 'simkl' || id === 'letterboxd') continue; // IMDB, SIMKL & Letterboxd are always unlocked
     const row = document.querySelector(`.toggle-row[data-service="${id}"]`);
     const cb = document.getElementById(id);
     const lock = row?.querySelector('.lock-hint');

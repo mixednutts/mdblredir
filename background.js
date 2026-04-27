@@ -166,6 +166,35 @@ const SERVICES = {
         return null;
       }
     }
+  },
+
+  letterboxd: {
+    pattern: /https?:\/\/(www\.)?letterboxd\.com\/film\/([^/?]+)/i,
+    async resolve(match) {
+      const slug = match[2];
+
+      try {
+        const res = await fetch(`https://letterboxd.com/film/${slug}/`, { cache: 'no-store' });
+        if (res.ok) {
+          const html = await res.text();
+          const imdbMatch = html.match(/imdb\.com\/title\/(tt\d+)/i);
+          if (imdbMatch) {
+            const imdbId = imdbMatch[1];
+            const movieUrl = `https://mdblist.com/movie/${imdbId}`;
+            try {
+              const headRes = await fetch(movieUrl, { method: 'HEAD', redirect: 'follow', cache: 'no-store' });
+              if (headRes.ok) return movieUrl;
+            } catch (_) {}
+            return movieUrl;
+          }
+        }
+      } catch (_) {}
+
+      const title = slugToTitle(slug);
+      const imdbId = await apiSearch('movie', title);
+      if (imdbId) return `https://mdblist.com/movie/${imdbId}`;
+      return null;
+    }
   }
 };
 
@@ -178,7 +207,8 @@ chrome.runtime.onInstalled.addListener((details) => {
         simkl: true,
         trakt: false,
         tmdb: false,
-        tvdb: false
+        tvdb: false,
+        letterboxd: false
       }
     });
   }
